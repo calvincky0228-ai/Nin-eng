@@ -3,93 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fruit Ninja Game</title>
+    <title>Nin-eng</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f0f0f0;
-        }
-        #gameArea {
-            position: relative;
-            width: 800px;
-            height: 600px;
-            overflow: hidden;
-            margin: 0 auto;
-            background-image: url('background.jpg');
-            background-size: cover;
+            background: linear-gradient(to bottom right, #ff7e5f, #feb47b); /* Simple gradient background */
         }
         .fruit {
-            position: absolute;
-            transition: transform 0.3s ease;
-        }
-        .score {
-            font-size: 24px;
-            margin: 20px;
-        }
-        .game-over {
-            display: none;
-            font-size: 36px;
-            color: red;
+            width: 50px;
+            height: 50px;
+            background-color: red; /* Red circle fruit image */
+            border-radius: 50%;
         }
     </style>
 </head>
 <body>
-
-    <h1>Fruit Ninja</h1>
-    <div class="score">Score: <span id="score">0</span></div>
-    <div id="gameArea"></div>
-    <div class="game-over" id="gameOver">Game Over!</div>
-    <script>
-        let score = 0;
-        const gameArea = document.getElementById('gameArea');
-        const scoreDisplay = document.getElementById('score');
-        const gameOverDisplay = document.getElementById('gameOver');
-        let gameInterval;
-
-        function startGame() {
-            document.querySelector('.game-over').style.display = 'none';
-            score = 0;
-            scoreDisplay.textContent = score;
-            spawnFruit();
-            gameInterval = setInterval(spawnFruit, 2000);
-            setTimeout(endGame, 30000); // Game lasts for 30 seconds
-        }
-
-        function spawnFruit() {
-            const fruit = document.createElement('img');
-            fruit.src = 'fruit.png';
-            fruit.classList.add('fruit');
-            const randomX = Math.random() * (gameArea.clientWidth - 50);
-            const randomY = Math.random() * (gameArea.clientHeight - 50);
-            fruit.style.left = `${randomX}px`;
-            fruit.style.top = `${randomY}px`;
-            gameArea.appendChild(fruit);
-
-            fruit.onclick = function () {
-                score += 1;
-                scoreDisplay.textContent = score;
-                fruit.style.transform = 'scale(1.2)';
-                setTimeout(() => {
-                    gameArea.removeChild(fruit);
-                }, 300);
-            };
-            setTimeout(() => {
-                if (gameArea.contains(fruit)) {
-                    gameArea.removeChild(fruit);
-                    score -= 1;
-                    scoreDisplay.textContent = score;
-                }
-            }, 1000);
-        }
-
-        function endGame() {
-            clearInterval(gameInterval);
-            document.querySelector('.game-over').style.display = 'block';
-            gameArea.innerHTML = ''; // Clear fruits
-        }
-
-        window.onload = startGame;
-    </script>
+    <div class="fruit"></div>
 </body>
 </html>
